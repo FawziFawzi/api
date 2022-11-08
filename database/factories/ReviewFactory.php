@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,11 @@ class ReviewFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'products_id'=>Product::factory()->create(),
+            'customer' => $this -> faker -> name(),
+            'review' => $this -> faker -> paragraph(),
+            'star' => $this -> faker -> numberBetween(0,5)
+
         ];
     }
 }
