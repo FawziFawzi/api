@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    public function reviews(Type $var = null)
+    {
+        return $this->hasMany(Review::class,'products_id');
+    }
 }
