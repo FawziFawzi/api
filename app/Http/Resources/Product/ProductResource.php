@@ -14,13 +14,16 @@ class ProductResource extends JsonResource
      */
     public function toArray($request)
     {
+        // return parent::toArray($request);
         return [
             'name'=> $this->name,
             'description' => $this->detail,
-            'price' => $this->price,
 
             'stock' => $this->stock ==0 ? "Out of stock"
             : $this->stock ,
+
+            'price' => $this->price,
+
 
             'discount' => $this->discount,
             'total price' =>round( $this->price*(1-($this->discount/100)),2),
