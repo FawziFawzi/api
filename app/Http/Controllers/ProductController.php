@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\productRequest;
+
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\Product\ProductCollection;
 use App\Http\Resources\Product\ProductResource;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 
 class ProductController extends Controller
@@ -90,13 +93,19 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateProductRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Model\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(Request $request, Product $product)
     {
-        //
+        $request['detail'] =$request->description;
+        unset($request['description']);
+        $product->update($request->all());
+
+        return response([
+            "data"=> new ProductResource($product),
+        ],HttpFoundationResponse::HTTP_CREATED);
     }
 
     /**
