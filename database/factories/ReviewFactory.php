@@ -18,7 +18,7 @@ class ReviewFactory extends Factory
     public function definition()
     {
         return [
-            'products_id'=>Product::factory()->create(),
+            'products_id'=>Product::factory(),
             'customer' => $this -> faker -> name(),
             'review' => $this -> faker -> paragraph(),
             'star' => $this -> faker -> numberBetween(0,5)

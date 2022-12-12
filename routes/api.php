@@ -17,6 +17,7 @@ use App\Http\Controllers\ReviewController;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
+
     return response()->json($request->user()); ;
 });
 Route::apiResource('/products',ProductController::class);
