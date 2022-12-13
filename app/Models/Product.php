@@ -13,7 +13,7 @@ class Product extends Model
         'name','detail','stock','price','discount'
     ];
 
-    public function reviews(Type $var = null)
+    public function reviews()
     {
         return $this->hasMany(Review::class,'products_id');
     }
